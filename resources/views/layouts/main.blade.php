@@ -10,7 +10,7 @@
 </head>
 <body>
     
-    <nav class="navbar bg-body-tertiary">
+    <nav class="navbar bg-body-tertiary shadow">
 
         <div class="container-fluid">
             <a href="{{route('landing')}}" class="navbar-brand mx-5">Knitwear By L</a>
@@ -42,6 +42,10 @@
                     @endif
                 </li>
 
+                @if(auth()->user()->admin)
+                <li class="nav-item">Admin</li>
+                @endif
+
                 <li class="nav-item">Hi {{auth()->user()->name}}</li>
 
                 @else
@@ -60,7 +64,7 @@
     </nav>
 
     @if(Route::currentRouteName() === 'landing')
-        <div class="landing-banner d-flex justify-content-center align-items-center">
+        <div class="landing-banner d-flex justify-content-center align-items-center shadow-lg">
             <h1 class="text-light">Landing page</h1>
         </div>
     
