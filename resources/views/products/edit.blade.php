@@ -24,6 +24,12 @@
         <input class="form-control" type="text" name="price" value={{$product->price}}>
         <label for="image" class="form-label">Thumbnail</label>
         <input class="form-control" type="file" name="image" value="{{$product->image}}">
+        <label for="images" class="form-label">Images</label>
+        <input class="form-control" type="file" name="images[]" multiple>
+        
+        <label for="description" class="form-label">Description</label>
+        <input class="form-control" type="text" name="description" value="{{$product->description}}">
+
 
         <input class="btn btn-dark m-2" type="submit" value="Confirm">
         <a href="{{route('product.index')}}" class="btn btn-dark">Back</a>

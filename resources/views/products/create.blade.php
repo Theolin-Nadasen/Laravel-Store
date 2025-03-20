@@ -20,6 +20,9 @@
     <input class="form-control" type="text" name="name" placeholder="name">
     <input class="form-control" type="text" name="qty" placeholder="qty">
     <input class="form-control" type="text" name="price" placeholder="price">
+
+    <input class="form-control" type="text" name="description" placeholder="description">
+
     <input class="form-control" type="file" name="image">
     <input class="form-control" type="file" name="images[]" multiple>
     

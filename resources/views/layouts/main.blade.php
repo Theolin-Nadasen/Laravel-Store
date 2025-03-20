@@ -43,7 +43,9 @@
                 </li>
 
                 @if(auth()->user()->admin)
-                <li class="nav-item">Admin</li>
+                <li class="nav-item">
+                    <a href="{{route('product.index')}}">Admin</a>
+                </li>
                 @endif
 
                 <li class="nav-item">Hi {{auth()->user()->name}}</li>

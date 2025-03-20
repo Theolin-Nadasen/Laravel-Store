@@ -17,7 +17,7 @@
 
                 <div class="card-body">
                     <h5 class="card-title text-dark fw-bold">{{$product->name}}</h5>
-                    <p class="card-text text-dark">This is where the description goes</p>
+                    <p class="card-text text-dark">{{$product->description}}</p>
                     <div class="d-flex justify-content-center">
                         <a href="{{route('view', ['product' => $product])}}" class="btn btn-info">View Product</a>
                     </div>

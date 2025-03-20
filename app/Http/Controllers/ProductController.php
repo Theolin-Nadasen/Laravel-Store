@@ -23,7 +23,8 @@ class ProductController extends Controller
             'qty' => 'required|numeric',
             'price' => 'required|decimal:2',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg'
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'description' => 'required'
         ]);
 
         // store image
@@ -58,12 +59,26 @@ class ProductController extends Controller
             'name' => 'required',
             'qty' => 'required|numeric',
             'price' => 'required|decimal:2',
+            'description' => 'required'
         ]);
 
+        // store the thumbnail
         if($request->hasFile('image')){
             $imgPath = $request->file('image')->store('images', 'public');
             $data['image'] = $imgPath;
         }
+
+        //store the other images
+        
+        if ($request->hasFile('images')) {
+            $imagePaths = [];
+            foreach ($request->file('images') as $image) {
+                $imagePaths[] = $image->store('images', 'public');
+            }
+            $data['images'] = $imagePaths;
+        }
+
+        
 
         $product->update($data);
 
