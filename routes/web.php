@@ -31,5 +31,6 @@ Route::get('/view/{product}', [NavigationController::class, 'viewProduct'])->nam
 
 Route::get('/addtocart/{product}', [NavigationController::class, 'addtocart'])->name('addtocart');
 Route::get('/cart', [NavigationController::class, 'viewcart'])->name('cart');
+Route::post('/cart/{product}', [NavigationController::class, 'removefromcart'])->name('cart.remove');
 
 require __DIR__.'/auth.php';

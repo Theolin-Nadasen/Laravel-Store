@@ -32,11 +32,37 @@ class NavigationController extends Controller
 
     public function viewcart(){
         $products = [];
+        
 
         foreach (json_decode(auth()->user()->cart) as $id){
             $products[] = Product::find($id);
         };
 
-        return view('cart', ['products' => $products]);
+        // totaling up the pices
+        $total = 0.00;
+
+        foreach($products as $item){
+            $total = $total + $item->price;
+        }
+
+        return view('cart', ['products' => $products, 'total' => $total]);
+    }
+
+    public function removefromcart(Product $product){
+        $user = auth()->user();
+        $cart = json_decode(auth()->user()->cart);
+
+        if(($key = array_search($product->id, $cart)) !== false){
+            unset($cart[$key]);
+            $cart = array_values($cart);
+        }
+
+        $user->cart = json_encode($cart);
+        $user->save();
+
+        $products = Product::all();
+
+        return redirect(route('cart', ['products' => $products]));
+
     }
 }
