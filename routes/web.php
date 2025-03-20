@@ -30,5 +30,6 @@ Route::get('/catalogue', [NavigationController::class, 'catalogue'])->name('cata
 Route::get('/view/{product}', [NavigationController::class, 'viewProduct'])->name('view');
 
 Route::get('/addtocart/{product}', [NavigationController::class, 'addtocart'])->name('addtocart');
+Route::get('/cart', [NavigationController::class, 'viewcart'])->name('cart');
 
 require __DIR__.'/auth.php';

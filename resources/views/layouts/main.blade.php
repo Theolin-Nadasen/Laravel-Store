@@ -36,7 +36,7 @@
 
                 <li class="nav-item">
                     @if (auth()->user()->cart)
-                    <a href="#" class="nav-link">cart({{count(json_decode(auth()->user()->cart, true))}})</a>
+                    <a href="{{route('cart')}}" class="nav-link">cart({{count(json_decode(auth()->user()->cart, true))}})</a>
                     @else
                     <a href="#" class="nav-link">cart()</a>
                     @endif

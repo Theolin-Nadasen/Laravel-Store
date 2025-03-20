@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -78,6 +79,16 @@ class ProductController extends Controller
             $data['images'] = $imagePaths;
         }
 
+        // clear all carts
+        if(User::all()){
+
+            foreach(User::all() as $user){
+                $user->cart = null;
+                $user->save();
+            }
+
+        }
+
         
 
         $product->update($data);
@@ -87,6 +98,16 @@ class ProductController extends Controller
 
     public function destroy(Product $product, Request $request){
         $product->delete();
+
+        // clear all carts
+        if(User::all()){
+
+            foreach(User::all() as $user){
+                $user->cart = null;
+                $user->save();
+            }
+
+        }
         
         return redirect(route('product.index'));
     }

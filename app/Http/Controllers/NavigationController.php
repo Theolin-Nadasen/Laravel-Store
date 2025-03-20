@@ -29,4 +29,14 @@ class NavigationController extends Controller
         return redirect(route('landing'));
 
     }
+
+    public function viewcart(){
+        $products = [];
+
+        foreach (json_decode(auth()->user()->cart) as $id){
+            $products[] = Product::find($id);
+        };
+
+        return view('cart', ['products' => $products]);
+    }
 }
