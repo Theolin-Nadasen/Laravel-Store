@@ -2,46 +2,49 @@
 
 @section('content')
 
-<table class="table">
+<div class="table-responsive">
 
-    <tr>
-        <th>Image</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Remove</th>
-    </tr>
+    <table class="table">
 
-    @foreach ($products as $product)
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Remove</th>
+        </tr>
 
-    <tr>
-        <td>
-            <img src="{{asset('storage/' . $product->image)}}" alt="Product Image" width="64">
-        </td>
+        @foreach ($products as $product)
 
-        <td>{{$product->name}}</td>
-        <td>{{$product->price}}</td>
+        <tr>
+            <td>
+                <img src="{{asset('storage/' . $product->image)}}" alt="Product Image" width="64">
+            </td>
 
-        <td>
-            <form action="{{route('cart.remove', ['product' => $product])}}" method="post">
-                @csrf
-                @method('post')
+            <td>{{$product->name}}</td>
+            <td>{{$product->price}}</td>
 
-                <input type="submit" value="X" class="btn btn-danger">
-            </form>
-        </td>
-    </tr>
-        
-    @endforeach
+            <td>
+                <form action="{{route('cart.remove', ['product' => $product])}}" method="post">
+                    @csrf
+                    @method('post')
 
-    <tr>
-        <td></td>
-        <td>Total : R{{$total}}</td>
-        <td>
-            <a href="#" class="btn btn-success">Checkout</a>
-        </td>
-        <td></td>
-    </tr>
+                    <input type="submit" value="X" class="btn btn-danger">
+                </form>
+            </td>
+        </tr>
+            
+        @endforeach
 
-</table>
+        <tr>
+            <td></td>
+            <td>Total : R{{$total}}</td>
+            <td>
+                <a href="#" class="btn btn-success">Checkout</a>
+            </td>
+            <td></td>
+        </tr>
+
+    </table>
+</div>
 
 @endsection

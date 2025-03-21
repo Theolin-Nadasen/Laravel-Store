@@ -10,56 +10,64 @@
 </head>
 <body>
     
-    <nav class="navbar bg-body-tertiary shadow">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
 
         <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
             <a href="{{route('landing')}}" class="navbar-brand mx-5">Knitwear By L</a>
 
-            <ul class="navbar-nav d-flex flex-row me-auto">
+            <div class="collapse navbar-collapse" id="navbarContent">
+                
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">my link</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('catalogue')}}" class="nav-link">Catelogue</a>
-                </li>
+                <ul class="navbar-nav">
 
-                @if (Auth::user())
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">my link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('catalogue')}}" class="nav-link">Catelogue</a>
+                    </li>
 
-                <li class="nav-item">
-                    <form action="{{route('logout')}}" method="post">
-                        @csrf
-                        @method('post')
-                        <input type="submit" value="Logout" class="nav-link">
-                    </form>
-                </li>
+                    @if (Auth::user())
 
-                <li class="nav-item">
-                    @if (auth()->user()->cart)
-                    <a href="{{route('cart')}}" class="nav-link">cart({{count(json_decode(auth()->user()->cart, true))}})</a>
-                    @else
-                    <a href="#" class="nav-link">cart()</a>
+                    <li class="nav-item">
+                        <form action="{{route('logout')}}" method="post">
+                            @csrf
+                            @method('post')
+                            <input type="submit" value="Logout" class="nav-link">
+                        </form>
+                    </li>
+
+                    <li class="nav-item">
+                        @if (auth()->user()->cart)
+                        <a href="{{route('cart')}}" class="nav-link">cart({{count(json_decode(auth()->user()->cart, true))}})</a>
+                        @else
+                        <a href="#" class="nav-link">cart()</a>
+                        @endif
+                    </li>
+
+                    @if(auth()->user()->admin)
+                    <li class="nav-item">
+                        <a href="{{route('product.index')}}">Admin</a>
+                    </li>
                     @endif
-                </li>
 
-                @if(auth()->user()->admin)
-                <li class="nav-item">
-                    <a href="{{route('product.index')}}">Admin</a>
-                </li>
-                @endif
+                    <li class="nav-item">Hi {{auth()->user()->name}}</li>
 
-                <li class="nav-item">Hi {{auth()->user()->name}}</li>
+                    @else
+                    <li class="nav-item">
+                        <a href="{{route('register')}}" class="nav-link"> Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('login')}}" class="nav-link"> Login</a>
+                    </li>
+                    @endif
 
-                @else
-                <li class="nav-item">
-                    <a href="{{route('register')}}" class="nav-link"> Register</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('login')}}" class="nav-link"> Login</a>
-                </li>
-                @endif
-
-            </ul>
+                </ul>
+            </div>
 
         </div>
 
