@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class NavigationController extends Controller
 {
+    public function home(){
+        return view('welcome');
+    }
+
     public function catalogue(){
         $products = Product::all();
 

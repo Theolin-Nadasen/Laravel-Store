@@ -1,13 +1,13 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="d-flex justify-content-center mt-2">
+<div class="d-flex justify-content-center mt-5">
     <h1>Catalogue</h1>
 </div>
 
     <div class="d-flex justify-content-center">
 
-        <div class="row justify-content-between">
+        <div class="row justify-content-evenly">
             @foreach ($products as $product)
             
             <div class="card col-s-6 col-md-3 m-2 bg-light-subtle shadow rounded">

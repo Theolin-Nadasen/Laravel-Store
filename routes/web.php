@@ -5,13 +5,11 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('landing');
+Route::get('/', [NavigationController::class, 'home'])->name('landing');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return redirect(route('landing'));
+})->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -19,12 +17,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/products', [ProductController::class, 'index'])->name('product.index');
-Route::get('/products/create', [ProductController::class, 'create'])->name('product.create');
-Route::post('/products', [ProductController::class, 'store'])->name('product.store');
-Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('product.edit');
-Route::put('/products/{product}/update', [ProductController::class, 'update'])->name('product.update');
-Route::delete('/products/{product}/destroy', [ProductController::class, 'destroy'])->name('product.destroy');
+Route::get('/products', [ProductController::class, 'index'])->middleware('auth')->name('product.index');
+Route::get('/products/create', [ProductController::class, 'create'])->middleware('auth')->name('product.create');
+Route::post('/products', [ProductController::class, 'store'])->middleware('auth')->name('product.store');
+Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->middleware('auth')->name('product.edit');
+Route::put('/products/{product}/update', [ProductController::class, 'update'])->middleware('auth')->name('product.update');
+Route::delete('/products/{product}/destroy', [ProductController::class, 'destroy'])->middleware('auth')->name('product.destroy');
 
 Route::get('/catalogue', [NavigationController::class, 'catalogue'])->name('catalogue');
 Route::get('/view/{product}', [NavigationController::class, 'viewProduct'])->name('view');

@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="d-flex align-items-center flex-column">
+<div class="d-flex align-items-center flex-column mt-5">
 
     <div id="carouselExampleAutoplaying" class="carousel slide w-50" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -35,7 +35,9 @@
 
 
 
-    <h1>{{$product->name}}</h1>
+    <h1 class="mt-2">{{$product->name}}</h1>
+
+    <p>{{$product->description}}</p>
 
     <a href="{{route('addtocart', ['product' => $product])}}" class="btn btn-info">Add To Cart</a>
 

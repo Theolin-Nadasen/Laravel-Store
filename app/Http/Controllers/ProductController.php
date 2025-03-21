@@ -9,16 +9,31 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function index(){
+        // don't let them go if not admin
+        if(!auth()->user()->admin){
+            return redirect(route('landing'));
+        }
+
         $products = Product::all();
 
         return view('products.index', ['products' => $products]);
     }
 
     public function create(){
+        // don't let them go if not admin
+        if(!auth()->user()->admin){
+            return redirect(route('landing'));
+        }
+
         return view('products.create');
     }
 
     public function store(Request $request){
+        // don't let them go if not admin
+        if(!auth()->user()->admin){
+            return redirect(route('landing'));
+        }
+
         $data = $request->validate([
             'name' => 'required',
             'qty' => 'required|numeric',
@@ -50,12 +65,21 @@ class ProductController extends Controller
     }
 
     public function edit(Product $product) {
+        // don't let them go if not admin
+        if(!auth()->user()->admin){
+            return redirect(route('landing'));
+        }
 
         return view('products.edit', ['product' => $product]);
 
     }
 
     public function update(Product $product, Request $request){
+        // don't let them go if not admin
+        if(!auth()->user()->admin){
+            return redirect(route('landing'));
+        }
+
         $data = $request->validate([
             'name' => 'required',
             'qty' => 'required|numeric',
@@ -97,6 +121,11 @@ class ProductController extends Controller
     }
 
     public function destroy(Product $product, Request $request){
+        // don't let them go if not admin
+        if(!auth()->user()->admin){
+            return redirect(route('landing'));
+        }
+
         $product->delete();
 
         // clear all carts
