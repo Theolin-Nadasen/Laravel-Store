@@ -23,6 +23,8 @@
 
     <input class="form-control" type="text" name="description" placeholder="description">
 
+    <textarea class="form-control" name="longdescription" placeholder="long description"></textarea>
+
     <input class="form-control" type="file" name="image">
     <input class="form-control" type="file" name="images[]" multiple>
     

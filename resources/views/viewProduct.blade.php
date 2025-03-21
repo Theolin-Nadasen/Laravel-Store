@@ -37,7 +37,7 @@
 
     <h1 class="mt-2">{{$product->name}}</h1>
 
-    <p>{{$product->description}}</p>
+    <p>{!! nl2br(e($product->longdescription)) !!}</p>
 
     <a href="{{route('addtocart', ['product' => $product])}}" class="btn btn-info">Add To Cart</a>
 

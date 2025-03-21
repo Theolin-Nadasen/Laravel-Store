@@ -40,7 +40,8 @@ class ProductController extends Controller
             'price' => 'required|decimal:0,2',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
-            'description' => 'required'
+            'description' => 'required',
+            'longdescription' => 'required'
         ]);
 
         // store image
@@ -84,7 +85,8 @@ class ProductController extends Controller
             'name' => 'required',
             'qty' => 'required|numeric',
             'price' => 'required|decimal:0,2',
-            'description' => 'required'
+            'description' => 'required',
+            'longdescription' => 'required'
         ]);
 
         // store the thumbnail
