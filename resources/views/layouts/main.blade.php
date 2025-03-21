@@ -34,19 +34,19 @@
                     @if (Auth::user())
 
                     <li class="nav-item">
-                        <form action="{{route('logout')}}" method="post">
-                            @csrf
-                            @method('post')
-                            <input type="submit" value="Logout" class="nav-link">
-                        </form>
-                    </li>
-
-                    <li class="nav-item">
                         @if (auth()->user()->cart)
                         <a href="{{route('cart')}}" class="nav-link">cart({{count(json_decode(auth()->user()->cart, true))}})</a>
                         @else
                         <a href="#" class="nav-link">cart()</a>
                         @endif
+                    </li>
+
+                    <li class="nav-item">
+                        <form action="{{route('logout')}}" method="post">
+                            @csrf
+                            @method('post')
+                            <input type="submit" value="Logout" class="nav-link">
+                        </form>
                     </li>
 
                     @if(auth()->user()->admin)

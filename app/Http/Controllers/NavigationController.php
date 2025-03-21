@@ -8,7 +8,10 @@ use Illuminate\Http\Request;
 class NavigationController extends Controller
 {
     public function home(){
-        return view('welcome');
+
+        $products = Product::latest()->take(3)->get();
+
+        return view('welcome', ['products' => $products]);
     }
 
     public function catalogue(){

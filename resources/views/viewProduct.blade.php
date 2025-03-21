@@ -39,8 +39,9 @@
 
     <p>{!! nl2br(e($product->longdescription)) !!}</p>
 
-    <a href="{{route('addtocart', ['product' => $product])}}" class="btn btn-info">Add To Cart</a>
-
+    @if(Auth::user())
+    <a href="{{route('addtocart', ['product' => $product])}}" class="btn btn-info">Add To Cart (R{{$product->price}})</a>
+    @endif
     
 </div>
     
