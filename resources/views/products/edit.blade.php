@@ -43,4 +43,14 @@
         <a href="{{route('product.index')}}" class="btn btn-dark">Back</a>
     </form>
 
+    <br>
+    <h1>For best results :</h1>
+    
+    <ul>
+        <li>Square image for thumbnail</li>
+        <li>Same sized images for product images</li>
+        <li>A short description for the description field</li>
+        <li>A long detailed multi-line description for the long description</li>
+    </ul>
+
 @endsection
