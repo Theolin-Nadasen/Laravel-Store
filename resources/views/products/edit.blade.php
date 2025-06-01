@@ -48,7 +48,7 @@
     
     <ul>
         <li>Square image for thumbnail</li>
-        <li>Same sized images for product images</li>
+        <li>Same sized images for product images for best results</li>
         <li>A short description for the description field</li>
         <li>A long detailed multi-line description for the long description</li>
     </ul>

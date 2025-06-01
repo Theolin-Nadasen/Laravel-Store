@@ -16,17 +16,20 @@
         <div class="col-2"></div>
 
         <div class="col-10 col-md-4">
-            <img src="{{asset('storage/' . $product->image)}}" alt="Product Image" width="256">
+            <img src="{{asset('storage/' . $product->image)}}" alt="Product Image" class="w-75 mb-2">
         </div>
 
         <div class="col-2 d-md-none"></div>
 
         <div class="col-10 col-md-6 d-flex flex-column justify-content-between">
-            <p>{{$product->description}}</p>
+            <div>
+                <h2>{{$product->name}}</h2>
+                <p>{{$product->description}}</p>
+            </div>
 
             {{-- SHows the add to cart button but only if user is logged in--}}
             @if(Auth::user())
-            <a href="{{route('addtocart', ['product' => $product])}}" class="btn btn-info w-50">Add To Cart (R{{$product->price}})</a>
+            <a href="{{route('addtocart', ['product' => $product])}}" class="btn btn-info w-50 w-md-25">Add To Cart (R{{$product->price}})</a>
             @endif
         </div>
     </div>
