@@ -40,6 +40,14 @@
             <td>Total : R{{$total}}</td>
             <td>
                 <a href="#" class="btn btn-success">Checkout</a>
+                <form action="{{ route('payment.initiate') }}" method="post">
+                    @csrf
+                    @method('post')
+
+                    <input type="hidden" name="amount" value="{{$total}}">
+                    
+                    <button type="submit" class="btn btn-success">Checkout</button>
+                </form>
             </td>
             <td></td>
         </tr>

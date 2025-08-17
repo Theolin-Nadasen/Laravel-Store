@@ -3,6 +3,7 @@
 use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [NavigationController::class, 'home'])->name('landing');
@@ -30,5 +31,17 @@ Route::get('/view/{product}', [NavigationController::class, 'viewProduct'])->nam
 Route::get('/addtocart/{product}', [NavigationController::class, 'addtocart'])->name('addtocart');
 Route::get('/cart', [NavigationController::class, 'viewcart'])->name('cart');
 Route::post('/cart/{product}', [NavigationController::class, 'removefromcart'])->name('cart.remove');
+
+Route::post('/payment/initiate', [PaymentController::class, 'initiatePayment'])->name('payment.initiate');
+
+Route::get('/payment/success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
+Route::get('/payment/failure', [PaymentController::class, 'paymentFailure'])->name('payment.failure');
+Route::get('/payment/cancel', [PaymentController::class, 'paymentCancel'])->name('payment.cancel');
+
+Route::post('/payment/callback', [PaymentController::class, 'paymentCallback'])->name('payment.callback');
+
+Route::get('/phpinfo', function () {
+    phpinfo();
+});
 
 require __DIR__.'/auth.php';
