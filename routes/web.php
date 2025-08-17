@@ -4,6 +4,7 @@ use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [NavigationController::class, 'home'])->name('landing');
@@ -39,6 +40,12 @@ Route::get('/payment/failure', [PaymentController::class, 'paymentFailure'])->na
 Route::get('/payment/cancel', [PaymentController::class, 'paymentCancel'])->name('payment.cancel');
 
 Route::post('/payment/callback', [PaymentController::class, 'paymentCallback'])->name('payment.callback');
+
+Route::get('/checkout', [PaymentController::class, 'showCheckoutForm'])->name('checkout.show');
+Route::post('/checkout', [PaymentController::class, 'placeOrder'])->name('checkout.placeOrder');
+
+Route::get('/admin/orders', [OrderController::class, 'index'])->name('admin.orders.index');
+Route::patch('/admin/orders/{order}/complete', [OrderController::class, 'markAsComplete'])->name('admin.orders.complete');
 
 Route::get('/phpinfo', function () {
     phpinfo();
