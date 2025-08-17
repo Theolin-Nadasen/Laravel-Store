@@ -1,4 +1,15 @@
 .landing-banner{
     height: 40vh;
     background-color: black;
+
+    background-image: url('../images/hero_background.jpg'); /* Make sure this path is correct! */
+
+    /* Ensure the image covers the entire banner area without stretching */
+    background-size: cover;
+
+    /* Center the image within the banner */
+    background-position: center center;
+
+    /* Prevent the image from repeating if it's smaller than the banner */
+    background-repeat: no-repeat;
 }

@@ -15,8 +15,8 @@ class OrderController extends Controller
         }
 
 
-        $incompleteOrders = Order::where('is_complete', false)->latest()->paginate(1, ['*'], 'pending_page');
-        $completeOrders = Order::where('is_complete', true)->latest()->paginate(15, ['*'], 'completed_page');
+        $incompleteOrders = Order::where('is_complete', false)->latest()->paginate(3, ['*'], 'pending_page');
+        $completeOrders = Order::where('is_complete', true)->latest()->paginate(3, ['*'], 'completed_page');
 
 
         return view('admin.orders.index', [
