@@ -47,6 +47,8 @@ Route::post('/checkout', [PaymentController::class, 'placeOrder'])->name('checko
 Route::get('/admin/orders', [OrderController::class, 'index'])->name('admin.orders.index');
 Route::patch('/admin/orders/{order}/complete', [OrderController::class, 'markAsComplete'])->name('admin.orders.complete');
 
+Route::get('/contact', [NavigationController::class, 'contact'])->name('contact');
+
 Route::get('/phpinfo', function () {
     phpinfo();
 });

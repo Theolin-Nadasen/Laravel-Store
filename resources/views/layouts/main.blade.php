@@ -27,9 +27,6 @@
                 <ul class="navbar-nav">
 
                     <li class="nav-item">
-                        <a href="#" class="nav-link">my link</a>
-                    </li>
-                    <li class="nav-item">
                         <a href="{{route('catalogue')}}" class="nav-link">Catelogue</a>
                     </li>
 
@@ -54,7 +51,11 @@
 
                         @if(auth()->user()->admin)
                             <li class="nav-item">
-                                <a href="{{route('product.index')}}">Admin</a>
+                                <a href="{{route('product.index')}}">Manage Products</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{route('admin.orders.index')}}">Manage Orders</a>
                             </li>
                         @endif
 
@@ -85,7 +86,7 @@
 
                 <div class="mt-3 d-flex justify-content-end">
                     <a href="{{ route('catalogue') }}" class="btn btn-primary">Shop Toys</a>
-                    <a href="#" class="btn btn-secondary ms-2">Custom Order</a>
+                    <a href="{{ route('contact') }}" class="btn btn-secondary ms-2">Custom Order</a>
                 </div>
 
             </div>

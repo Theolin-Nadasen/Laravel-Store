@@ -72,4 +72,9 @@ class NavigationController extends Controller
         return redirect(route('cart', ['products' => $products]));
 
     }
+
+    public function contact()
+    {
+        return view('contact');
+    }
 }
