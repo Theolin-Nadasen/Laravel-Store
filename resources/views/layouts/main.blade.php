@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('css/custom.css')}}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" defer></script>
-    <title>My Page</title>
+    <title>Knitwear By L</title>
 </head>
 
 <body>

@@ -28,14 +28,14 @@ class PaymentController extends Controller
 
         $requestData = [
             'entityID' => config('ikhokha.app_id'),
-            'externalEntityID' => config('ikhokha.app_id'), // Added for consistency with examples
+            'externalEntityID' => config('ikhokha.app_id'),
             'amount' => $amountInCents,
             'currency' => 'ZAR',
             'requesterUrl' => url('/'),
             'description' => 'Payment for Order ' . $order->order_id,
-            'paymentReference' => $order->order_id, // Added for consistency with examples
+            'paymentReference' => $order->order_id,
             'mode' => 'test', // Or 'live'
-            'externalTransactionID' => $order->order_id, // We use our saved order_id
+            'externalTransactionID' => $order->order_id,
             'urls' => [
                 'callbackUrl' => route('payment.callback'),
                 'successPageUrl' => route('payment.success'),
