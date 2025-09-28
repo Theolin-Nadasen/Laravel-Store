@@ -34,7 +34,7 @@ class PaymentController extends Controller
             'requesterUrl' => url('/'),
             'description' => 'Payment for Order ' . $order->order_id,
             'paymentReference' => $order->order_id,
-            'mode' => 'test', // Or 'live'
+            'mode' => 'live', // Or 'live'
             'externalTransactionID' => $order->order_id,
             'urls' => [
                 'callbackUrl' => route('payment.callback'),
