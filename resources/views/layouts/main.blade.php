@@ -27,7 +27,7 @@
                 <ul class="navbar-nav">
 
                     <li class="nav-item">
-                        <a href="{{route('catalogue')}}" class="nav-link">Catelogue</a>
+                        <a href="{{route('catalogue')}}" class="nav-link">Catalogue</a>
                     </li>
 
                     @if (Auth::user())

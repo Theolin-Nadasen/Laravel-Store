@@ -14,7 +14,12 @@ class ProductController extends Controller
             return redirect(route('landing'));
         }
 
-        $products = Product::all();
+        $products = Product::where('is_master', true)
+                        ->orWhere(function ($query) {
+                            $query->whereNull('parent_product_id')
+                                  ->where('is_master', false);
+                        })
+                        ->get();
 
         return view('products.index', ['products' => $products]);
     }
@@ -41,7 +46,11 @@ class ProductController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'description' => 'required',
-            'longdescription' => 'required'
+            'longdescription' => 'required',
+            'has_variants' => 'nullable',
+            'price_small' => 'nullable|decimal:0,2',
+            'price_large' => 'nullable|decimal:0,2',
+            'colors' => 'nullable|string',
         ]);
 
         // store image
@@ -57,10 +66,61 @@ class ProductController extends Controller
                 $imagePaths[] = $image->store('images', 'public');
             }
         }
-
         $data['images'] = $imagePaths;
 
-        $newProduct = Product::create($data);
+        if ($request->has('has_variants')) {
+            // Create the master product
+            $masterProduct = Product::create([
+                'name' => $data['name'],
+                'qty' => $data['qty'],
+                'price' => $data['price'], // Price for Normal
+                'image' => $data['image'] ?? null,
+                'images' => $data['images'] ?? [],
+                'description' => $data['description'],
+                'longdescription' => $data['longdescription'],
+                'is_master' => true,
+            ]);
+
+            $sizes = [];
+            if (isset($data['price'])) {
+                $sizes['Normal'] = $data['price'];
+            }
+            if (isset($data['price_small'])) {
+                $sizes['Small'] = $data['price_small'];
+            }
+            if (isset($data['price_large'])) {
+                $sizes['Large'] = $data['price_large'];
+            }
+
+            $colors = [];
+            if (!empty($data['colors'])) {
+                $colors = array_map('trim', explode(',', $data['colors']));
+            } else {
+                $colors = [null]; // Default case if no colors are provided
+            }
+
+            foreach ($sizes as $sizeName => $sizePrice) {
+                foreach ($colors as $colorName) {
+                    Product::create([
+                        'parent_product_id' => $masterProduct->id,
+                        'name' => $masterProduct->name,
+                        'qty' => $data['qty'], // Assuming qty is the same for all variants
+                        'price' => $sizePrice,
+                        'image' => $masterProduct->image,
+                        'images' => $masterProduct->images,
+                        'description' => $masterProduct->description,
+                        'longdescription' => $masterProduct->longdescription,
+                        'is_master' => false,
+                        'size' => $sizeName,
+                        'color' => $colorName,
+                    ]);
+                }
+            }
+
+        } else {
+            // Create a simple product (as before)
+            $newProduct = Product::create($data);
+        }
         
         return redirect(route('product.index'));
     }

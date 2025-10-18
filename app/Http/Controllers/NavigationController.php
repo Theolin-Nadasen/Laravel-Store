@@ -9,13 +9,23 @@ class NavigationController extends Controller
 {
     public function home(){
 
-        $products = Product::latest()->take(3)->get();
+        $products = Product::where('is_master', true)
+                        ->orWhere(function ($query) {
+                            $query->whereNull('parent_product_id')
+                                  ->where('is_master', false);
+                        })
+                        ->latest()->take(3)->get();
 
         return view('welcome', ['products' => $products]);
     }
 
     public function catalogue(){
-        $products = Product::all();
+        $products = Product::where('is_master', true)
+                        ->orWhere(function ($query) {
+                            $query->whereNull('parent_product_id')
+                                  ->where('is_master', false);
+                        })
+                        ->get();
 
         return view('catelog', ['products' => $products]);
     }

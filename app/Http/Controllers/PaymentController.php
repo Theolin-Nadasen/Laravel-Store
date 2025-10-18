@@ -189,7 +189,18 @@ class PaymentController extends Controller
 
         $products = Product::find($cartItemIds);
 
-        $product_names = $products->pluck('name');
+        $product_details = [];
+        foreach ($products as $product) {
+            $detail = $product->name;
+            if ($product->size) {
+                $detail .= " (Size: " . $product->size;
+                if ($product->color) {
+                    $detail .= ", Color: " . $product->color;
+                }
+                $detail .= ")";
+            }
+            $product_details[] = $detail;
+        }
 
         $orderTotalDecimal = $products->sum('price');
 
@@ -206,7 +217,7 @@ class PaymentController extends Controller
             'customer_name' => $request->input('customer_name'),
             'contact_phone' => $request->input('contact_phone'),
             'delivery_address' => $request->input('delivery_address'),
-            'items' => $product_names,
+            'items' => $product_details,
             'total_amount' => $orderTotalDecimal,
         ]);
 
